@@ -69,19 +69,29 @@ export default function Home() {
   const [snapshots, setSnapshots] = useState<SnapshotMessage[]>([]);
 
   useEffect(() => {
-    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-    const socket = new WebSocket(`${protocol}://localhost:8081`);
+    const wsUrl =
+      process.env.NEXT_PUBLIC_WS_URL ||
+      (typeof window !== "undefined"
+        ? `${window.location.protocol === "https:" ? "wss" : "ws"}://localhost:8081`
+        : "ws://localhost:8081");
+
+    console.log("Connecting to WebSocket:", wsUrl);
+
+    const socket = new WebSocket(wsUrl);
     wsRef.current = socket;
 
     socket.onopen = () => {
+      console.log("WebSocket connected");
       setConnected(true);
     };
 
     socket.onclose = () => {
+      console.log("WebSocket disconnected");
       setConnected(false);
     };
 
-    socket.onerror = () => {
+    socket.onerror = (error) => {
+      console.error("WebSocket error:", error);
       setConnected(false);
     };
 
