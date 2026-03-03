@@ -29,7 +29,8 @@ const wss = new WebSocketServer({ port: PORT });
 
 function runPing(host) {
   return new Promise((resolvePing) => {
-    exec(`ping -n -c 1 -W 1 ${host}`, (error, stdout) => {
+    // Use Linux-compatible ping flags: -c (count), -W (timeout in ms)
+    exec(`ping -c 1 -W 2000 ${host}`, (error, stdout) => {
       const lossMatch = stdout.match(/(\d+(?:\.\d+)?)%\s+packet\s+loss/i);
       const packetLoss = lossMatch
         ? Number.parseFloat(lossMatch[1])
