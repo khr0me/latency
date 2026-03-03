@@ -10,7 +10,7 @@ const targetsPath = resolve(__dirname, "../data/targets.json");
 const targets = JSON.parse(readFileSync(targetsPath, "utf-8"));
 
 const HISTORY_SIZE = 40;
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 
 const state = {
   mode: "normal",
