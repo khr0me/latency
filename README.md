@@ -1,7 +1,7 @@
 # Latency Lab
 
 ## What is it?
- 
+
 Latency Lab is a realtime internet latency monitor I built to visualize network performance across multiple global nodes. It gives you a clear picture of how your connection is performing—measuring latency, jitter, and packet loss as they happen. The dashboard displays everything on an interactive world map and live updating charts, so you can see exactly where your connection is struggling.
 
 Built with React and Next.js on the frontend, paired with a Node.js WebSocket server that runs ping measurements in the background. It's meant to be useful for anyone who cares about network performance, whether you're testing your setup or just curious about how your internet actually behaves.
